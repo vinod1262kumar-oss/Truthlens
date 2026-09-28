@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Label Check: claim vs reality</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="blob blob-mustard" aria-hidden="true"></div>
+<div class="blob blob-green" aria-hidden="true"></div>
+
+<main>
+  <header>
+    <h1>How much should you trust this pack?</h1>
+    <p class="sub">Add a photo of the label, check the numbers, and see the claims tested against FSSAI rules and WHO guidance.</p>
+  </header>
+
+  <section class="panel">
+    <label class="drop" for="photo">
+      <input type="file" id="photo" accept="image/*" multiple>
+      <strong>Choose or take photos</strong>
+      <span>Front (claims) and back (ingredients + nutrition table)</span>
+    </label>
+    <div class="thumbs" id="thumbs"></div>
+    <div class="actions">
+      <button class="btn btn-green" id="read" type="button" disabled>Read label</button>
+      <button class="btn btn-mustard" id="manual" type="button">Enter numbers</button>
+    </div>
+    <p class="note" id="status" role="status"></p>
+  </section>
+
+  <section id="form" class="panel hide">
+    <h2>Product details</h2>
+    <div class="grid">
+      <div class="full"><label for="name">Product name</label><input id="name" type="text" placeholder="e.g. Choco Bar"></div>
+      <div class="full"><label for="type">Food type</label>
+        <select id="type"><option value="solid">Solid (per 100 g)</option><option value="drink">Drink (per 100 ml)</option></select></div>
+      <div><label for="energy_kcal">Energy (kcal)</label><input id="energy_kcal" type="number" step="0.1" min="0"></div>
+      <div><label for="sugar_g">Total sugar (g)</label><input id="sugar_g" type="number" step="0.1" min="0"></div>
+      <div><label for="added_sugar_g">Added sugar (g)</label><input id="added_sugar_g" type="number" step="0.1" min="0"></div>
+      <div><label for="fat_g">Total fat (g)</label><input id="fat_g" type="number" step="0.1" min="0"></div>
+      <div><label for="sat_fat_g">Saturated fat (g)</label><input id="sat_fat_g" type="number" step="0.1" min="0"></div>
+      <div><label for="trans_fat_g">Trans fat (g)</label><input id="trans_fat_g" type="number" step="0.01" min="0"></div>
+      <div><label for="sodium_mg">Sodium (mg)</label><input id="sodium_mg" type="number" step="1" min="0"></div>
+      <div><label for="protein_g">Protein (g)</label><input id="protein_g" type="number" step="0.1" min="0"></div>
+      <div><label for="fibre_g">Fibre (g)</label><input id="fibre_g" type="number" step="0.1" min="0"></div>
+      <div class="full"><label for="ingredients">Ingredients, in printed order (comma separated)</label>
+        <textarea id="ingredients" rows="2" placeholder="Sugar, Cocoa butter, Milk solids, INS 322"></textarea></div>
+    </div>
+    <fieldset>
+      <legend>Claims on the front of the pack</legend>
+      <div class="chips" id="claims"></div>
+    </fieldset>
+    <button class="btn btn-green wide" id="check" type="button">Check this pack</button>
+  </section>
+
+  <section id="result" class="hide" aria-live="polite">
+    <div class="panel score-panel">
+      <div class="ring" id="ring"><span id="scoreNum">0</span></div>
+      <div><div class="verdict" id="verdict"></div><div class="note" id="prod"></div></div>
+    </div>
+    <div class="panel"><h2>Claim vs Reality</h2><div id="claimRows"></div></div>
+    <div class="panel"><h2>Red flags</h2><div id="flagRows"></div></div>
+    <button class="btn btn-mustard wide" id="copy" type="button">Copy summary</button>
+  </section>
+
+  <p class="note fine">Information only, not medical or legal advice. Thresholds follow FSSAI Advertising and Claims Regulations (Schedule I) and WHO guidance, plus UK/Chile reference cut-offs where India has no final numbers. See js/scoring.js for every rule.</p>
+</main>
+
+<script src="js/scoring.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
